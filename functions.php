@@ -83,6 +83,15 @@ function wppl_htmlblocks_parse_query($query) {
 	}
 }
 
+function manage_edit_htmlblocks_columns( $columns ){
+	$columns['header_name'] = 'Рубрика'; 
+	return $columns;
+}
+
+function manage_htmlblocks_custom_column($value, $column_name, $tax_id){
+	return $tax_id;
+}
+
 function wppl_htmlblocks_mb_options($post){
 	$wppl_htmlblocks_mb_option_html = get_post_meta($post->ID, 'wppl_htmlblocks_mb_option_html', true);
 	$wppl_htmlblocks_mb_option_html_close = get_post_meta($post->ID, 'wppl_htmlblocks_mb_option_html_close', true);
@@ -251,13 +260,20 @@ function wppl_htmlblocks_sc($atts, $content = '') {
 
 function wppl_manage_htmlblocks_posts_columns($defaults) {
 	$defaults['htmlblocks_column_sc'] = 'Shortcode';
+	$defaults['htmlblocks_column_categories'] = 'Categories';
     return $defaults;
 }
 
 function wppl_manage_htmlblocks_posts_custom_column($column_name, $post_ID) {
 	if ($column_name == 'htmlblocks_column_sc') {
 		$wppl_htmlblocks_mb_option_sc = get_post_meta($post_ID, 'wppl_htmlblocks_mb_option_sc', true);
-        echo $wppl_htmlblocks_mb_option_sc;
+        if (!empty($wppl_htmlblocks_mb_option_sc)) echo $wppl_htmlblocks_mb_option_sc;
+	}
+	
+	if ($column_name == 'htmlblocks_column_categories') {
+		$list = get_the_term_list($post_ID, 'htmlblocks_category', '', ', ');
+
+		if (!empty($list)) echo $list;
     }
 }
 
