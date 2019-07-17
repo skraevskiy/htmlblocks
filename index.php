@@ -1,7 +1,9 @@
 <?php
 /*
-Plugin Name: WPPL HTML Blocks
-Description: WordPress plugin to add HTML shortcodes with CSS and JS inserts into the content of any pages
+ * Plugin Name: WPPL HTML Blocks
+ * Description: WordPress plugin to add HTML shortcodes with CSS and JS inserts into the content of any pages
+ * Author:      Sergey Kraevskiy
+ * Version:     1.0
 */
 
 require_once 'functions.php';
